@@ -25,6 +25,15 @@ namespace MyShop.Models
         [Display(Name ="Mô tả chi tiết")]
         [MaxLength(255)]
         public string Description { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "Hình sản phẩm")]
+        public string ProductImage { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "Hình chi tiết sản phẩm")]
+        public string SingleImage1 { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "Hình chi tiết sản phẩm")]
+        public string SingleImage2 { get; set; }
 
 
         [Display(Name ="Mã giảm giá")]
@@ -44,11 +53,5 @@ namespace MyShop.Models
         public int TrademarkID { get; set; }
         [ForeignKey("TrademarkID")]
         public Trademark Trademark { get; set; }
-
-        [Display(Name ="Mã hình ảnh")]
-        [MaxLength(50)]
-        public int ImgID { get; set; }
-        [ForeignKey("ImgID")]
-        public ImgProduct ImgProduct { get; set; }
     }
 }

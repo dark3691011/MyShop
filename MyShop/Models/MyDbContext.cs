@@ -10,7 +10,6 @@ namespace MyShop.Models
     {
         public DbSet<ProductType> productTypes { get; set; }
         public DbSet<Trademark> trademarks { get; set; }
-        public DbSet<ImgProduct> imgProducts { get; set; }
         public DbSet<Discount> discounts { get; set; }
         public DbSet<Product> products { get; set; }
         public DbSet<Bill> bills { get; set; }
