@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyShop.DataModels
+namespace MyShop.Models
 {
     public class Customer
     {
