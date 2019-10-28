@@ -9,11 +9,12 @@ namespace MyShop.Models
     public class Trademark
     {
         [Key]
-        [MaxLength(50)]
         [Display(Name ="Mã thương hiệu")]
+        [Required]
         public int TrademarkID { get; set; }
         [Display(Name="Tên thương hiệu")]
         [MaxLength(50)]
+        [Required(ErrorMessage ="Phải nhập tên thương hiệu")]
         public string Name { get; set; }
         [MaxLength(255)]
         [Display(Name ="Mô tả")]

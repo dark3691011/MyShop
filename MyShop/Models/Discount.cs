@@ -10,10 +10,11 @@ namespace MyShop.Models
     {
         [Key]
         [Display(Name ="Mã giảm giá")]
-        [MaxLength(20)]
+        [Required]
         public int DiscountID { get; set; }
         [Display(Name ="% giảm giá")]
         [Range(0,100)]
+        [Required(ErrorMessage ="Phải có giả trị giảm giá")]
         public int DiscountValue { get; set; }
         [Display(Name ="Ngày hết hạn")]
         [MaxLength(20)]

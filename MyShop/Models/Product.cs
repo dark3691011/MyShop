@@ -11,21 +11,25 @@ namespace MyShop.Models
     {
         [Key]
         [Display(Name ="Mã sản phẩm")]
-        [MaxLength(50)]
+        [Required]
         public int ProductID { get; set; }
         [Display(Name ="Tên sản phẩm")]
         [MaxLength(100)]
+        [Required(ErrorMessage ="Phải nhập tên sản phẩm")]
         public string ProductName { get; set; }
         [Display(Name ="Đơn giá")]
         [MaxLength(50)]
+        [Required(ErrorMessage ="Phải nhập giá sản phẩm")]
         public double UnitPrice { get; set; }
         [Display(Name ="Số lượng")]
         [MaxLength(50)]
+        [Required(ErrorMessage ="Phải nhập số lượng")]
         public int Amount { get; set; }
         [Display(Name ="Mô tả chi tiết")]
         [MaxLength(255)]
         public string Description { get; set; }
         [MaxLength(50)]
+        [Required(ErrorMessage ="Phải có hình ảnh")]
         [Display(Name = "Hình sản phẩm")]
         public string ProductImage { get; set; }
         [MaxLength(50)]
@@ -38,7 +42,7 @@ namespace MyShop.Models
 
         [Display(Name ="Mã giảm giá")]
         [MaxLength(50)]
-        public int DiscountID { get; set; }
+        public int? DiscountID { get; set; }
         [ForeignKey("DiscountID")]
         public Discount Discount { get; set; }
 

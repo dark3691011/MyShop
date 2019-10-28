@@ -10,16 +10,15 @@ namespace MyShop.Models
     public class ProductType
     {
         [Key]
-        [MaxLength(50)]
         [Display(Name ="Mã loại")]
         [Required]
         public int TypeID { get; set; }
         [MaxLength(100)]
         [Display(Name ="Tên loại")]
+        [Required(ErrorMessage ="Chưa nhập tên loại")]
         public string TypeName { get; set; }
         
 
-        [MaxLength(50)]
         [Display(Name ="Mã loại cha")]
         public int? FatherTypeID { get; set; }
         [ForeignKey("FatherTypeID")]
