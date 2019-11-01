@@ -19,7 +19,7 @@ namespace MyShop.Models
         [MaxLength(255)]
         [Display(Name ="Mô tả")]
         public string Description { get; set; }
-        [MaxLength(50)]
+        [MaxLength(150)]
         [Display(Name="Logo thương hiệu")]
         public string Logo { get; set; }
         [MaxLength(150)]
