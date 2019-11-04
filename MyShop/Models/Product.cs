@@ -27,7 +27,6 @@ namespace MyShop.Models
         [MaxLength(255)]
         public string Description { get; set; }
         [MaxLength(50)]
-        [Required(ErrorMessage ="Phải có hình ảnh")]
         [Display(Name = "Hình sản phẩm")]
         public string ProductImage { get; set; }
 

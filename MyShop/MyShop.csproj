@@ -16,9 +16,12 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\" />
-    <Folder Include="wwwroot\Img\Logo\" />
-    <Folder Include="wwwroot\Img\SingleImage\" />
-    <Folder Include="wwwroot\Img\ProductImage\" />
+    <Folder Include="wwwroot\Img\logo\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\js\site.js" />
   </ItemGroup>
 
 </Project>

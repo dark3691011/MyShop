@@ -58,7 +58,7 @@ namespace MyShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                trademark.Logo = TeacherHiensTool.UploadHinh(fLogo,"Logo");
+                trademark.Logo = TeacherHiensTool.UploadHinh(fLogo,"logo");
                 _context.Add(trademark);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
