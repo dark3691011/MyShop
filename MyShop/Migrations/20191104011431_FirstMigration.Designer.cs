@@ -10,8 +10,8 @@ using MyShop.Models;
 namespace MyShop.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20191028041816_defineModels")]
-    partial class defineModels
+    [Migration("20191104011431_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -117,14 +117,12 @@ namespace MyShop.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Amount")
-                        .HasMaxLength(50);
+                    b.Property<int>("Amount");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("DiscountID")
-                        .HasMaxLength(50);
+                    b.Property<int?>("DiscountID");
 
                     b.Property<string>("ProductImage")
                         .IsRequired()
@@ -134,20 +132,11 @@ namespace MyShop.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<string>("SingleImage1")
-                        .HasMaxLength(50);
+                    b.Property<int>("TrademarkID");
 
-                    b.Property<string>("SingleImage2")
-                        .HasMaxLength(50);
+                    b.Property<int>("TypeID");
 
-                    b.Property<int>("TrademarkID")
-                        .HasMaxLength(50);
-
-                    b.Property<int>("TypeID")
-                        .HasMaxLength(50);
-
-                    b.Property<double>("UnitPrice")
-                        .HasMaxLength(50);
+                    b.Property<double>("UnitPrice");
 
                     b.HasKey("ProductID");
 
@@ -166,8 +155,7 @@ namespace MyShop.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FatherTypeID")
-                        .HasMaxLength(50);
+                    b.Property<int?>("FatherTypeID");
 
                     b.Property<string>("TypeName")
                         .IsRequired()
@@ -193,7 +181,7 @@ namespace MyShop.Migrations
                         .HasMaxLength(255);
 
                     b.Property<string>("Logo")
-                        .HasMaxLength(50);
+                        .HasMaxLength(150);
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -115,14 +115,12 @@ namespace MyShop.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Amount")
-                        .HasMaxLength(50);
+                    b.Property<int>("Amount");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("DiscountID")
-                        .HasMaxLength(50);
+                    b.Property<int?>("DiscountID");
 
                     b.Property<string>("ProductImage")
                         .IsRequired()
@@ -132,20 +130,11 @@ namespace MyShop.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<string>("SingleImage1")
-                        .HasMaxLength(50);
+                    b.Property<int>("TrademarkID");
 
-                    b.Property<string>("SingleImage2")
-                        .HasMaxLength(50);
+                    b.Property<int>("TypeID");
 
-                    b.Property<int>("TrademarkID")
-                        .HasMaxLength(50);
-
-                    b.Property<int>("TypeID")
-                        .HasMaxLength(50);
-
-                    b.Property<double>("UnitPrice")
-                        .HasMaxLength(50);
+                    b.Property<double>("UnitPrice");
 
                     b.HasKey("ProductID");
 

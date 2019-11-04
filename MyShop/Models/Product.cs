@@ -18,11 +18,9 @@ namespace MyShop.Models
         [Required(ErrorMessage ="Phải nhập tên sản phẩm")]
         public string ProductName { get; set; }
         [Display(Name ="Đơn giá")]
-        [MaxLength(50)]
         [Required(ErrorMessage ="Phải nhập giá sản phẩm")]
         public double UnitPrice { get; set; }
         [Display(Name ="Số lượng")]
-        [MaxLength(50)]
         [Required(ErrorMessage ="Phải nhập số lượng")]
         public int Amount { get; set; }
         [Display(Name ="Mô tả chi tiết")]
@@ -32,28 +30,19 @@ namespace MyShop.Models
         [Required(ErrorMessage ="Phải có hình ảnh")]
         [Display(Name = "Hình sản phẩm")]
         public string ProductImage { get; set; }
-        [MaxLength(50)]
-        [Display(Name = "Hình chi tiết sản phẩm")]
-        public string SingleImage1 { get; set; }
-        [MaxLength(50)]
-        [Display(Name = "Hình chi tiết sản phẩm")]
-        public string SingleImage2 { get; set; }
 
 
         [Display(Name ="Mã giảm giá")]
-        [MaxLength(50)]
         public int? DiscountID { get; set; }
         [ForeignKey("DiscountID")]
         public Discount Discount { get; set; }
 
         [Display(Name ="Mã loại")]
-        [MaxLength(50)]
         public int TypeID { get; set; }
         [ForeignKey("TypeID")]
         public ProductType ProductType { get; set; }
 
         [Display(Name ="Mã thương hiệu")]
-        [MaxLength(50)]
         public int TrademarkID { get; set; }
         [ForeignKey("TrademarkID")]
         public Trademark Trademark { get; set; }
