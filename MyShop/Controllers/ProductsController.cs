@@ -2,21 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyShop.Models;
+using MyShop.ViewModels;
 
 namespace MyShop.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly MyDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ProductsController(MyDbContext context)
+        public ProductsController(MyDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
+        }
+
+        public IActionResult Category(int? typeId)
+        {
+            if (typeId.HasValue)
+            {
+                List<Product> productsHasTypeId = _context.products.Include(p => p.Discount).Include(p => p.ProductType).Where(p => p.ProductType.TypeID == typeId || p.ProductType.FatherTypeID == typeId).ToList();
+                var productsHasTypeIdView = _mapper.Map<List<ProductViewModel>>(productsHasTypeId);
+                ViewBag.Data = productsHasTypeIdView;
+                return View();
+            }
+            List<Product> products = _context.products.Include(p => p.Discount).ToList();
+            var productsView = _mapper.Map<List<ProductViewModel>>(products);
+            ViewBag.Data = productsView;
+            return View();
         }
 
         // GET: Products
@@ -29,22 +48,14 @@ namespace MyShop.Controllers
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id.HasValue)
             {
-                return NotFound();
+                Product productHasId = _context.products.Include(p => p.Trademark).Include(p => p.Discount).SingleOrDefault(p => p.ProductID == id);
+                var productHasIdView = _mapper.Map<ProductDetailViewModel>(productHasId);
+                ViewBag.Data = productHasIdView;
+                return View();
             }
-
-            var product = await _context.products
-                .Include(p => p.Discount)
-                .Include(p => p.ProductType)
-                .Include(p => p.Trademark)
-                .FirstOrDefaultAsync(m => m.ProductID == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
+            return RedirectToAction("Category");
         }
 
         // GET: Products/Create

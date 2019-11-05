@@ -1,0 +1,15 @@
+﻿@model IEnumerable<MyShop.Models.ProductType>
+@{
+    var fatherProductTypes = Model.Where(p => p.FatherTypeID == null);
+}
+
+
+
+<ul class="sub-menu">
+    @foreach (var productType in fatherProductTypes)
+    {
+        <li>
+            <a asp-controller="Products" asp-action="Category" asp-route-typeId="@productType.TypeID">@productType.TypeName</a>
+        </li>
+    }
+</ul>

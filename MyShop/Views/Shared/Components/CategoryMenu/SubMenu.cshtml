@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MyShop.Models.ProductType>
+
+@{
+    var fatherProductTypes = Model.Where(p => p.FatherTypeID == null);
+}
+
+@foreach (var fatherProductType in fatherProductTypes)
+{
+    var sonProductTypes = Model.Where(p => p.FatherTypeID == fatherProductType.TypeID);
+
+    <li>
+        <a asp-controller="Products" asp-action="Category" asp-route-typeId="@fatherProductType.TypeID">@fatherProductType.TypeName</a>
+        <ul class="sub-menu">
+            @foreach (var productType in sonProductTypes)
+            {
+                <li><a asp-controller="Products" asp-action="Category" asp-route-typeId="@productType.TypeID">@productType.TypeName</a></li>
+            }
+        </ul>
+    </li>
+}
