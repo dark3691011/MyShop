@@ -10,7 +10,7 @@ using MyShop.Models;
 namespace MyShop.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20191104015816_FirstMigration1")]
+    [Migration("20191105052849_First-Migration1")]
     partial class FirstMigration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,11 +76,12 @@ namespace MyShop.Migrations
 
                     b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<int>("Gender");
+                    b.Property<string>("Gender")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(150);
+                        .HasMaxLength(70);
 
                     b.Property<string>("Password")
                         .IsRequired()

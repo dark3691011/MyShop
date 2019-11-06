@@ -10,8 +10,8 @@ using MyShop.Models;
 namespace MyShop.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20191105025851_nothing")]
-    partial class nothing
+    [Migration("20191105044408_First-Mi")]
+    partial class FirstMi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,7 +76,8 @@ namespace MyShop.Migrations
 
                     b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<int>("Gender");
+                    b.Property<string>("Gender")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -56,7 +56,20 @@
                         <div class="user-panel">
                             <div class="up-item">
                                 <i class="flaticon-profile"></i>
-                                <a href="#">Sign</a> In or <a href="#">Create Account</a>
+                                @{
+                                    var kh = Context.Session.Get<Customer>("Customer");
+                                }
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <a asp-controller="Customers" asp-action="Login">Đăng nhập </a>
+                                    <a asp-controller="Customers" asp-action="Create">Đăng ký</a>
+                                }
+                                else
+                                {
+                                    <a href="#">@kh?.Name </a>
+
+                                    <a asp-controller="Customers" asp-action="Logout">Đăng xuất</a>
+                                }
                             </div>
                             <div class="up-item">
                                 <div class="shopping-card">

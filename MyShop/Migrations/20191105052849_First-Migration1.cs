@@ -2,7 +2,7 @@
 
 namespace MyShop.Migrations
 {
-    public partial class nothing : Migration
+    public partial class FirstMigration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

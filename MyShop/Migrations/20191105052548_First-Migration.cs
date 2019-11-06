@@ -2,29 +2,28 @@
 
 namespace MyShop.Migrations
 {
-    public partial class FirstMigration1 : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "ProductImage",
-                table: "products",
-                maxLength: 50,
-                nullable: true,
+                name: "Name",
+                table: "customers",
+                maxLength: 70,
+                nullable: false,
                 oldClrType: typeof(string),
-                oldMaxLength: 50);
+                oldMaxLength: 150);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "ProductImage",
-                table: "products",
-                maxLength: 50,
+                name: "Name",
+                table: "customers",
+                maxLength: 150,
                 nullable: false,
                 oldClrType: typeof(string),
-                oldMaxLength: 50,
-                oldNullable: true);
+                oldMaxLength: 70);
         }
     }
 }
