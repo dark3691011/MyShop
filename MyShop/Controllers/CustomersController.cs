@@ -44,7 +44,7 @@ namespace MyShop.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, kh.Name),
-                    new Claim(ClaimTypes.Role, "Customer")
+                    new Claim(ClaimTypes.Role, kh.Role)
                 };
 
                 ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "login");
@@ -68,6 +68,31 @@ namespace MyShop.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult ChangeRole(int? id, string role)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var customer = _context.customers.FirstOrDefault(p => p.CustomerID == id);
+            if (customer == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            if (ModelState.IsValid)
+            {
+                customer.Role = role;
+                _context.Update(customer);
+                _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index");
+        }
+
         // GET: Customers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
@@ -76,7 +101,6 @@ namespace MyShop.Controllers
         }
 
         // GET: Customers/Details/5
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -131,6 +155,7 @@ namespace MyShop.Controllers
             {
                 return NotFound();
             }
+
             return View(customer);
         }
 
@@ -170,6 +195,7 @@ namespace MyShop.Controllers
         }
 
         // GET: Customers/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -190,6 +216,7 @@ namespace MyShop.Controllers
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var customer = await _context.customers.FindAsync(id);

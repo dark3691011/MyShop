@@ -38,5 +38,7 @@ namespace MyShop.Models
         [Display(Name = "Địa chỉ")]
         [MaxLength(100)]
         public string Addres { get; set; }
+        [Display(Name="Phân quyền")]
+        public string Role { get; set; } = MyRole.Customer;
     }
 }
