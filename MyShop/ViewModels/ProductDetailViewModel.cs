@@ -25,7 +25,7 @@ namespace MyShop.ViewModels
         [Display(Name = "Hình sản phẩm")]
         public string ProductImage { get; set; }
         [Display(Name = "Giảm giá")]
-        public int? Discount { get; set; }
+        public int Discount { get; set; } = 0;
         [Display(Name ="Logo thương hiệu")]
         public string Trademark { get; set; }
     }

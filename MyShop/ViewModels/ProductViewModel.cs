@@ -21,6 +21,6 @@ namespace MyShop.ViewModels
         [MaxLength(50)]
         [Display(Name = "Hình sản phẩm")]
         public string ProductImage { get; set; }
-        public int Discount { get; set; }
+        public int Discount { get; set; } = 0;
     }
 }

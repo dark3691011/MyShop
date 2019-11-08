@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using MyShop.Helpers;
 using MyShop.Models;
 using MyShop.ViewComponents;
+using MyShop.ViewModels;
 
 namespace MyShop.Controllers
 {
