@@ -10,11 +10,11 @@ using MyShop.Models;
 
 namespace MyShop.Controllers
 {
-    public class TrademarksController : Controller
+    public class TrademarkController : Controller
     {
         private readonly MyDbContext _context;
 
-        public TrademarksController(MyDbContext context)
+        public TrademarkController(MyDbContext context)
         {
             _context = context;
         }

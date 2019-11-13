@@ -1,0 +1,43 @@
+﻿@model MyShop.Models.Trademark
+
+<!-- product section -->
+<section class="product-section">
+    <div class="container">
+        <div class="back-link">
+            <a asp-controller="Product" asp-action="Category"> &lt;&lt; Back to Category</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-pic-zoom">
+                    <img class="product-big-img" src="~/Img/logo/@Model.Logo">
+                </div>
+            </div>
+            <div class="col-lg-6 product-details">
+                <h2 class="p-title">@Model.Name</h2>
+                <div class="p-review">
+                    <a href="">3 reviews</a>|<a href="">Add your review</a>
+                </div>
+                <div id="accordion" class="accordion-area">
+                    <div class="panel">
+                        <div class="panel-header" id="headingOne">
+                            <button class="panel-link active" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">information</button>
+                        </div>
+                        <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="panel-body">
+                                @Model.Description
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-sharing">
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-pinterest"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- product section end -->

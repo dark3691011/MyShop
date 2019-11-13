@@ -16,11 +16,11 @@ using MyShop.ViewModels;
 namespace MyShop.Controllers
 {
     [Authorize]
-    public class CustomersController : Controller
+    public class CustomerController : Controller
     {
         private readonly MyDbContext _context;
 
-        public CustomersController(MyDbContext context)
+        public CustomerController(MyDbContext context)
         {
             _context = context;
         }
@@ -135,6 +135,12 @@ namespace MyShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                var customerCheck = _context.customers.Where(p => p.UserName == customer.UserName);
+                if(customerCheck != null)
+                {
+                    ViewBag.notify = "Tên đăng nhập đã tồn tại";
+                    return View(customer);
+                }
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

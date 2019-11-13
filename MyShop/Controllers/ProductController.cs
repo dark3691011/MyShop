@@ -12,12 +12,12 @@ using MyShop.ViewModels;
 
 namespace MyShop.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductController : Controller
     {
         private readonly MyDbContext _context;
         private readonly IMapper _mapper;
 
-        public ProductsController(MyDbContext context, IMapper mapper)
+        public ProductController(MyDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

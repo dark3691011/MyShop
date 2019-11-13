@@ -9,11 +9,11 @@ using MyShop.Models;
 
 namespace MyShop.Controllers
 {
-    public class ProductTypesController : Controller
+    public class ProductTypeController : Controller
     {
         private readonly MyDbContext _context;
 
-        public ProductTypesController(MyDbContext context)
+        public ProductTypeController(MyDbContext context)
         {
             _context = context;
         }

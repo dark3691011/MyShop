@@ -8,6 +8,10 @@ namespace MyShop.ViewModels
 {
     public class ProductDetailViewModel
     {
+        [Key]
+        [Display(Name = "Mã sản phẩm")]
+        [Required]
+        public int ProductID { get; set; }
         [Display(Name = "Tên sản phẩm")]
         [MaxLength(100)]
         [Required(ErrorMessage = "Phải nhập tên sản phẩm")]

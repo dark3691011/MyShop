@@ -61,14 +61,14 @@
                                 }
                                 @if (!User.Identity.IsAuthenticated)
                                 {
-                                    <a asp-controller="Customers" asp-action="Login">Đăng nhập </a>
-                                    <a asp-controller="Customers" asp-action="Create">Đăng ký</a>
+                                    <a asp-controller="Customer" asp-action="Login">Đăng nhập </a>
+                                    <a asp-controller="Customer" asp-action="Create">Đăng ký</a>
                                 }
                                 else
                                 {
                                     <a href="#">@kh?.Name </a>
 
-                                    <a asp-controller="Customers" asp-action="Logout">Đăng xuất</a>
+                                    <a asp-controller="Customer" asp-action="Logout">Đăng xuất</a>
                                 }
                             </div>
                             <div class="up-item">
@@ -76,7 +76,7 @@
                                     <i class="flaticon-bag"></i>
                                     <span>0</span>
                                 </div>
-                                <a href="#">Shopping Cart</a>
+                                <a asp-controller="Cart" asp-action="Index">Shopping Cart</a>
                             </div>
                         </div>
                     </div>
@@ -87,16 +87,19 @@
             <div class="container">
                 <!-- menu -->
                 <ul class="main-menu">
-                    <li><a href="#">Home</a></li>
-                    <li>
+                    <li><a asp-controller=""="Home" asp-action="Index">Home</a></li>
+                    <!--<li>
                         <a href="#">
                             Jewelry
                             <span class="new">New</span>
                         </a>
+                    </li>-->
+                    <li>
+                        <a asp-controller="Product" asp-action="Category">Shop</a>
+                        @await Component.InvokeAsync("CategoryMenu", new { tmp = 1 })
                     </li>
                     <li>
-                        <a asp-controller="Products" asp-action="Category">Shop</a>
-                        @await Component.InvokeAsync("CategoryMenu", new { tmp = 1 })
+                        <a asp-controller="Trademark" asp-action="Index">Nhãn hiệu</a>
                     </li>
                     <li>
                         <a>CheckOut</a>

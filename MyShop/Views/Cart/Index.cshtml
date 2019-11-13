@@ -28,7 +28,7 @@
                                         <td class="product-col">
                                             <img src="~/Img/product/@item.Product.ProductImage" alt="">
                                             <div class="pc-title">
-                                                <h4>@item.Product.ProductName</h4>
+                                                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.ProductID"><h4>@item.Product.ProductName</h4></a>
                                                 <p>@item.Product.UnitPrice VND</p>
                                             </div>
                                         </td>
@@ -53,12 +53,9 @@
                 </div>
             </div>
             <div class="col-lg-4 card-right">
-                <form class="promo-code-form">
-                    <input type="text" placeholder="Enter promo code">
-                    <button>Submit</button>
-                </form>
-                <a href="" class="site-btn">Proceed to checkout</a>
-                <a href="" class="site-btn sb-dark">Continue shopping</a>
+                
+                <a asp-controller="Cart" asp-action="CheckOut">Proceed to checkout</a>
+                <a asp-controller="Product" asp-action="Category">Continue shopping</a>
             </div>
         </div>
     </div>

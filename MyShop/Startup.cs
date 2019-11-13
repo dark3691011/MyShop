@@ -46,9 +46,9 @@ namespace MyShop
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(opt =>
                 {
-                    opt.LoginPath = "/Customers/Login";
-                    opt.AccessDeniedPath = "/Home/AccessDenied";
-                    opt.LogoutPath = "/Customers/Logout";
+                    opt.LoginPath = "/Customer/Login";
+                    opt.AccessDeniedPath = "/Home";
+                    opt.LogoutPath = "/Customer/Logout";
             });
         }
 
