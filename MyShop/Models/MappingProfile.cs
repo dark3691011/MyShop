@@ -16,6 +16,7 @@ namespace MyShop.Models
             CreateMap<Product, ProductDetailViewModel>()
                 .ForMember(d => d.Discount, opt => opt.MapFrom(s => s.Discount.DiscountValue))
                 .ForMember(d => d.Trademark, opt => opt.MapFrom(s => s.Trademark.Logo));
+            CreateMap<Customer, CheckOutViewModel>();
         }
     }
 }

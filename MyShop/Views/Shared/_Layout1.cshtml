@@ -74,7 +74,7 @@
                             <div class="up-item">
                                 <div class="shopping-card">
                                     <i class="flaticon-bag"></i>
-                                    <span>0</span>
+                                    <!--<span>0</span>-->
                                 </div>
                                 <a asp-controller="Cart" asp-action="Index">Shopping Cart</a>
                             </div>
@@ -102,10 +102,10 @@
                         <a asp-controller="Trademark" asp-action="Index">Nhãn hiệu</a>
                     </li>
                     <li>
-                        <a>CheckOut</a>
+                        <a asp-controller="CheckOut" asp-route-id="@kh?.CustomerID">CheckOut</a>
                     </li>
                     <li>
-                        <a>Contact</a>
+                        <a asp-controller="Contact">Contact</a>
                     </li>
                 </ul>
             </div>

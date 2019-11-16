@@ -131,16 +131,10 @@ namespace MyShop.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> Create([Bind("CustomerID,Name,UserName,Password,Email,DateOfBirth,Gender,Addres")] Customer customer)
+        public async Task<IActionResult> Create([Bind("CustomerID,Name,UserName,Password,Email,PhoneNumber,DateOfBirth,Gender,Addres")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                var customerCheck = _context.customers.Where(p => p.UserName == customer.UserName);
-                if(customerCheck != null)
-                {
-                    ViewBag.notify = "Tên đăng nhập đã tồn tại";
-                    return View(customer);
-                }
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -170,7 +164,7 @@ namespace MyShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerID,Name,UserName,Password,DateOfBirth,Gender,Addres")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("CustomerID,Name,UserName,Password,DateOfBirth,PhoneNumber,Email,Gender,Addres")] Customer customer)
         {
             if (id != customer.CustomerID)
             {
@@ -234,6 +228,16 @@ namespace MyShop.Controllers
         private bool CustomerExists(int id)
         {
             return _context.customers.Any(e => e.CustomerID == id);
+        }
+
+        public IActionResult CheckUserName(string UserName)
+        {
+            var check = _context.customers.SingleOrDefault(p => p.UserName == UserName);
+            if(check != null)
+            {
+                return Json(data: "Tên đăng nhập đã tồn tại");
+            }
+            return Json(data: true);
         }
     }
 }

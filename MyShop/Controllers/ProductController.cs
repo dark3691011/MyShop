@@ -23,13 +23,20 @@ namespace MyShop.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Category(int? typeId)
+        public IActionResult Category(int? typeId, int? trademarkId)
         {
             if (typeId.HasValue)
             {
                 List<Product> productsHasTypeId = _context.products.Include(p => p.Discount).Include(p => p.ProductType).Where(p => p.ProductType.TypeID == typeId || p.ProductType.FatherTypeID == typeId).ToList();
                 var productsHasTypeIdView = _mapper.Map<List<ProductViewModel>>(productsHasTypeId);
                 ViewBag.Data = productsHasTypeIdView;
+                return View();
+            }
+            if (trademarkId.HasValue)
+            {
+                List<Product> productsHasTrademarkId = _context.products.Include(p =>p.Discount).Include(p => p.Trademark).Where(p => p.Trademark.TrademarkID == trademarkId).ToList();
+                var productsHasTrademarkIdView = _mapper.Map<List<ProductViewModel>>(productsHasTrademarkId);
+                ViewBag.Data = productsHasTrademarkIdView;
                 return View();
             }
             List<Product> products = _context.products.Include(p => p.Discount).ToList();
