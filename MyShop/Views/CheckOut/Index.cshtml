@@ -1,40 +1,23 @@
-﻿
+﻿@model MyShop.ViewModels.CheckOutViewModel
 
-	<!-- checkout section  -->
+<!-- checkout section  -->
 <section class="checkout-section spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 order-2 order-lg-1">
-                <form class="checkout-form">
+                <form class="checkout-form" asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="CustomerID" />
                     <div class="cf-title">Billing Address</div>
-                    <div class="row">
-                        <div class="col-md-7">
-                            <p>*Billing Information</p>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="cf-radio-btns address-rb">
-                                <div class="cfr-item">
-                                    <input type="radio" name="pm" id="one">
-                                    <label for="one">Use my regular address</label>
-                                </div>
-                                <div class="cfr-item">
-                                    <input type="radio" name="pm" id="two">
-                                    <label for="two">Use a different address</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="row address-inputs">
                         <div class="col-md-12">
-                            <input type="text" placeholder="Address">
-                            <input type="text" placeholder="Address line 2">
-                            <input type="text" placeholder="Country">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" placeholder="Zip code">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" placeholder="Phone no.">
+                            <p>Tên khách hàng:</p>
+                            <input type="text" asp-for="Name" placeholder="Name" value="@Model.Name">
+                            <p>Địa chỉ:</p>
+                            <input type="text" asp-for="Addres" placeholder="Address" value="@Model.Addres">
+                            <p>Số điệnt thoại:</p>
+                            <input type="text" asp-for="PhoneNumber" placeholder="Phone number" value="@Model.PhoneNumber">
                         </div>
                     </div>
                     <div class="cf-title">Delievery Info</div>
@@ -71,7 +54,7 @@
                     <button class="site-btn submit-order-btn">Place Order</button>
                 </form>
             </div>
-           @await Component.InvokeAsync("CheckOutCart")
+            @await Component.InvokeAsync("CheckOutCart")
         </div>
     </div>
 </section>

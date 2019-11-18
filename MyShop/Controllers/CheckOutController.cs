@@ -25,13 +25,30 @@ namespace MyShop.Controllers
         }
         public IActionResult Index(int? id)
         {
-            return View();
+            if (id.HasValue)
+            {
+                Customer customer = _context.customers.SingleOrDefault(p => p.CustomerID == id);
+                var customerView = _mapper.Map<CheckOutViewModel>(customer);
+                return View(customerView);
+            }
+            return RedirectToAction("Index","Home");
         }
 
         [HttpPost]
-        public IActionResult Index()
+        public IActionResult Index(int id,CheckOutViewModel customerView)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                Customer customer = _context.customers.SingleOrDefault(p => p.CustomerID == id);
+                customer.Name = customerView.Name;
+                customer.Addres = customerView.Addres;
+                customer.PhoneNumber = customerView.PhoneNumber;
+                _context.Update(customer);
+                _context.SaveChanges();
+                var data = new List<CartItem>();
+                HttpContext.Session.Set("Cart", data);
+            }
+            return RedirectToAction("Index","Home");
         }
 
         public List<CartItem> Cart

@@ -39,6 +39,9 @@ namespace MyShop.Models
 
             //thay thế tiếng Việt
             str = Regex.Replace(str, @"[áàảạãăắằẳẵặâấầẩẫậ]", "a");
+            str = Regex.Replace(str, @"[éèẻẹêềếểệ]", "e");
+            str = Regex.Replace(str, @"[ưứừửự]", "u");
+            str = Regex.Replace(str, @"[óòỏọốồổộớờởợơô]", "o");
 
             str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
             str = Regex.Replace(str, @"\s+", "-").Trim();

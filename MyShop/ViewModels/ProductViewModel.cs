@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyShop.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace MyShop.ViewModels
         [MaxLength(50)]
         [Display(Name = "Hình sản phẩm")]
         public string ProductImage { get; set; }
+        public string ProductType { get; set; }
         public int Discount { get; set; } = 0;
+        
     }
 }

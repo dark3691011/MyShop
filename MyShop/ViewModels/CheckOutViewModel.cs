@@ -8,6 +8,8 @@ namespace MyShop.ViewModels
 {
     public class CheckOutViewModel
     {
+        [Display(Name = "Mã khách hàng")]
+        public int CustomerID { get; set; }
         [Required(ErrorMessage = "Phải nhập tên")]
         [Display(Name = "Tên khách hàng")]
         [StringLength(70, MinimumLength = 9, ErrorMessage = "Tên từ 10 đến 70 kí tự")]

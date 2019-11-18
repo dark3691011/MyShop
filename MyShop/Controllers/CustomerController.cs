@@ -70,7 +70,7 @@ namespace MyShop.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult ChangeRole(int? id, string role)
+        public async Task<IActionResult> ChangeRole(int? id, string role)
         {
             if (id == null)
             {
@@ -87,7 +87,8 @@ namespace MyShop.Controllers
             {
                 customer.Role = role;
                 _context.Update(customer);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
 
             return RedirectToAction("Index");
@@ -233,9 +234,9 @@ namespace MyShop.Controllers
         public IActionResult CheckUserName(string UserName)
         {
             var check = _context.customers.SingleOrDefault(p => p.UserName == UserName);
-            if(check != null)
+            if(check == null)
             {
-                return Json(data: "Tên đăng nhập đã tồn tại");
+                return Json(data: false);
             }
             return Json(data: true);
         }
