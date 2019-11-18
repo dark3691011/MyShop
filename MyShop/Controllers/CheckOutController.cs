@@ -39,11 +39,23 @@ namespace MyShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Update customer
                 Customer customer = _context.customers.SingleOrDefault(p => p.CustomerID == id);
                 customer.Name = customerView.Name;
                 customer.Addres = customerView.Addres;
                 customer.PhoneNumber = customerView.PhoneNumber;
                 _context.Update(customer);
+
+                //Save bill
+                Bill bill = new Bill();
+                bill.BillTime = DateTime.Now;
+                bill.CustomerID = customer.CustomerID;
+                bill.PaymentMethod = "Trả khi nhận hàng";
+                bill.Status = "Đang xử lý";
+                bill.TotalAmount = Cart.Sum(p => p.TotalPrice);
+                _context.Add(bill);
+
+
                 _context.SaveChanges();
                 var data = new List<CartItem>();
                 HttpContext.Session.Set("Cart", data);
