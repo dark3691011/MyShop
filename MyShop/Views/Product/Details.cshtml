@@ -1,7 +1,11 @@
 ﻿@{
-    var data = ViewBag.Data ?? new ProductViewModel();
+    var data = ViewBag.Data ?? new ProductDetailViewModel();
 }
 
+<meta property="og:title" content="@data.ProductName" />
+<meta property="og:image" content="http://myshop.somee.com/Img/product/@data.ProductImage" />
+<meta property="og:url" content="http://myshop.somee.com/Product/Details/@data.ProductID" />
+<meta property="og:description" content="@data.Description"/>
 <!-- product section -->
 <section class="product-section">
     <div class="container">
@@ -120,83 +124,13 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="sharethis-inline-share-buttons"></div>
+        </div>
     </div>
 </section>
 <!-- product section end -->
 <!-- RELATED PRODUCTS section -->
-<section class="related-product-section">
-    <div class="container">
-        <div class="section-title">
-            <h2>RELATED PRODUCTS</h2>
-        </div>
-        <div class="product-slider owl-carousel">
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/1.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <div class="tag-new">New</div>
-                    <img src="./img/product/2.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Black and White Stripes Dress</p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/3.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/4.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/6.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@await Component.InvokeAsync("RelatedProduct", new { page = "Contact" })
 <!-- RELATED PRODUCTS section end -->
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5dd3ab6c15fa30001260b5d0&product=inline-share-buttons" async="async"></script>

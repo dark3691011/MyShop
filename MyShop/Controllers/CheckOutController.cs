@@ -55,6 +55,12 @@ namespace MyShop.Controllers
                 bill.TotalAmount = Cart.Sum(p => p.TotalPrice);
                 _context.Add(bill);
 
+                /*foreach(var item in Cart)
+                {
+                    BillDetail detail = new BillDetail();
+                    detail.ProductID = item.Product.ProductID;
+                    detail.
+                }*/
 
                 _context.SaveChanges();
                 var data = new List<CartItem>();

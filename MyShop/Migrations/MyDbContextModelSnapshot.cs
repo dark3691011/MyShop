@@ -54,9 +54,13 @@ namespace MyShop.Migrations
 
                     b.Property<int>("Amount");
 
+                    b.Property<int>("BillID");
+
                     b.Property<int>("ProductID");
 
                     b.HasKey("BillDetailID");
+
+                    b.HasIndex("BillID");
 
                     b.HasIndex("ProductID");
 
@@ -208,6 +212,11 @@ namespace MyShop.Migrations
 
             modelBuilder.Entity("MyShop.Models.BillDetail", b =>
                 {
+                    b.HasOne("MyShop.Models.Bill", "Bill")
+                        .WithMany()
+                        .HasForeignKey("BillID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("MyShop.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductID")

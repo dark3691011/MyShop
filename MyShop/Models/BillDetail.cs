@@ -21,5 +21,10 @@ namespace MyShop.Models
         public int ProductID { get; set; }
         [ForeignKey("ProductID")]
         public Product Product { get; set; }
+
+        [Display(Name = "Mã hóa đơn")]
+        public int BillID { get; set; }
+        [ForeignKey("BillID")]
+        public Bill Bill { get; set; }
     }
 }

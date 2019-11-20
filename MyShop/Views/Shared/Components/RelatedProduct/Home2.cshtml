@@ -1,0 +1,32 @@
+﻿@{
+    var data = ViewBag.Data ?? new List<ProductViewModel>();
+}
+<section class="product-filter-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>BROWSE TOP SELLING PRODUCTS</h2>
+        </div>
+        <div class="row">
+            @for (int i = 0; i < 8; i++)
+            {
+                <div class="col-lg-3 col-sm-6">
+                    <div class="product-item">
+                        <div class="pi-pic">
+                            <img src="~/img/product/@data[i]?.ProductImage" alt="">
+                            <div class="pi-links">
+                                <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                                <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                            </div>
+                        </div>
+                        <div class="pi-text">
+                            <h6>@data[i]?.UnitPrice VND</h6>
+                            <p>@data[i]?.ProductName </p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
