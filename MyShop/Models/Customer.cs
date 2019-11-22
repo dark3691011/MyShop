@@ -31,8 +31,6 @@ namespace MyShop.Models
         [DataType(DataType.EmailAddress)]
         [MaxLength(150)]
         public string Email { get; set; }
-        [Display(Name="Số điện thoại")]
-        public string PhoneNumber { get; set; }
         [Display(Name = "Ngày sinh")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
@@ -44,5 +42,9 @@ namespace MyShop.Models
         public string Addres { get; set; }
         [Display(Name="Phân quyền")]
         public string Role { get; set; } = MyRole.Customer;
+        public string AuthyId { get; set; }
+        [Display(Name = "Số điện thoại")]
+        public string PhoneNumber { get; set; }
+        public bool PhoneNumberConfirmed { get; set; }
     }
 }

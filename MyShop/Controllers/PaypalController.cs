@@ -35,7 +35,7 @@ namespace MyShopK6.Controllers
         public async Task<IActionResult> Checkout()
         {
             //SandboxEnvironment(clientId, clientSerect)
-            var environment = new SandboxEnvironment("AQpgvR2MiWimK_hj88CQvkSyNg5xE_097z5rawOtDRvidGAGGxrdJdgKhb34l7sQfKTPeA1Z7O-f1Lkl", "ENitUdOKY6bjZ9w3tnqaETbcJeqYLrFot0lBhUgZlccaAEdkr1gFeTWGzh0zG_npFJ1MUGZbTzZLvJWe");
+            var environment = new SandboxEnvironment("AZ4ExMhO2SWYC78JIYuttkpWidwUBTuvvp8bRneUXBx9ZvDK1mcDNCyzt-hvt0ada_7Myq2ZI-x8ZiuQ", "EMm54L_aWkqodiZUmLPVV4mkKtruwJuK3qRPSHjXHLZU5_bCxxPczrbFaX7YSSRfE4N7Xf4Zw9lSMBg-");
             var client = new PayPalHttpClient(environment);
 
             //Đọc thông tin đơn hàng từ Session
@@ -101,8 +101,8 @@ namespace MyShopK6.Controllers
                 },
                 RedirectUrls = new RedirectUrls()
                 {
-                    CancelUrl = "http://localhost:50289/Paypal/Fail",
-                    ReturnUrl = "http://localhost:50289/Paypal/Success"
+                    CancelUrl = "http://localhost:44370/Paypal/Fail",
+                    ReturnUrl = "http://localhost:44370/Paypal/Success"
                 },
                 Payer = new Payer()
                 {
@@ -141,8 +141,6 @@ namespace MyShopK6.Controllers
 
                 return RedirectToAction("Fail");
             }
-
-            return View();
         }
 
         public IActionResult Success()
