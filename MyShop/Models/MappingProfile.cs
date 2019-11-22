@@ -12,8 +12,7 @@ namespace MyShop.Models
         public MappingProfile()
         {
             CreateMap<Product, ProductViewModel>()
-                .ForMember(d => d.Discount, opt => opt.MapFrom(s => s.Discount.DiscountValue))
-                .ForMember(d => d.ProductType, opt => opt.MapFrom(s => s.ProductType.TypeName));
+                .ForMember(d => d.Discount, opt => opt.MapFrom(s => s.Discount.DiscountValue));
             CreateMap<Product, ProductDetailViewModel>()
                 .ForMember(d => d.Discount, opt => opt.MapFrom(s => s.Discount.DiscountValue))
                 .ForMember(d => d.Trademark, opt => opt.MapFrom(s => s.Trademark.Logo));

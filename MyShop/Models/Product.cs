@@ -45,5 +45,7 @@ namespace MyShop.Models
         public int TrademarkID { get; set; }
         [ForeignKey("TrademarkID")]
         public Trademark Trademark { get; set; }
+
+        public string ProductNameSeoUrl => ProductName.ToUrlFriendly();
     }
 }

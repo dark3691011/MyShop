@@ -1,66 +1,68 @@
-﻿@{
-    var data = ViewBag.Data ?? new ProductDetailViewModel();
+﻿@model MyShop.ViewModels.ProductDetailViewModel
+
+@section metasocials{
+    <meta property="og:title" content="@Model.ProductName" />
+    <meta property="og:image" content="http://myshop.somee.com/Img/product/"@Model.ProductImage />
+    <meta property="og:url" content="http://myshop.somee.com/Product/Details/"@Model.ProductID />
+    <meta property="og:description" content="@Model.Description" />
 }
-<head>
-    <meta property="og:title" content="@data.ProductName" />
-    <meta property="og:image" content="http://myshop.somee.com/Img/product/@data.ProductImage" />
-    <meta property="og:url" content="http://myshop.somee.com/Product/Details/@data.ProductID" />
-    <meta property="og:description" content="@data.Description"/>
-</head>
-<!-- product section -->
-<section class="product-section">
-    <div class="container">
-        <div class="back-link">
-            <a asp-controller="Products" asp-action="Category"> &lt;&lt; Trở về shop</a>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="product-pic-zoom">
-                    <img class="product-big-img" src="~/Img/product/@data.ProductImage" alt="">
-                </div>
-                
+    <!-- product section -->
+    <section class="product-section">
+        <div class="container">
+            <div class="back-link">
+                <a asp-controller="Products" asp-action="Category"> &lt;&lt; Trở về shop</a>
             </div>
-            <div class="col-lg-6 product-details">
-                <h2 class="p-title">@data.ProductName</h2>
-                <h3>Thương hiệu: <img src="~/Img/logo/@data.Trademark" /></h3>
-                <h3 class="p-price">@data.UnitPrice VND</h3>
-                <h4 class="p-stock">Số lượng: <span>@data.Amount</span></h4>
-                <h4 class="p-stock">Giảm giá : <span>@data.Discount %</span></h4>
-                
-                
-                <div class="quantity">
-                    <p>Quantity</p>
-                    <div class="pro-qty"><input type="text" value="1"></div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product-pic-zoom">
+                        <img class="product-big-img" src="~/Img/product/@Model.ProductImage" alt="">
+                    </div>
+
                 </div>
-                <form asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@data.ProductID" method="post">
+                <div class="col-lg-6 product-details">
+                    <h2 class="p-title">@Model.ProductName</h2>
+                    <h3>Thương hiệu: <img src="~/Img/logo/@Model.Trademark" /></h3>
+                    <h3 class="p-price">@Model.UnitPrice VND</h3>
+                    <h4 class="p-stock">Số lượng: <span>@Model.Amount</span></h4>
+                    @if (Model.Discount > 0)
+                    {
+                    <h4 class="p-stock">Giảm giá : <span>@Model.Discount %</span></h4>
+                    }
+
+
                     <div class="quantity">
                         <p>Quantity</p>
-                        <div class="pro-qty"><input for="qty" name="qty" id="qty" type="text" value="1"></div>
+                        <div class="pro-qty"><input type="text" value="1"></div>
                     </div>
-                    <button class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></button>
-                </form>
-                <div id="accordion" class="accordion-area">
-                    <div class="panel">
-                        <div class="panel-header" id="headingOne">
-                            <button class="panel-link active" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">information</button>
+                    <form asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@Model.ProductID" method="post">
+                        <div class="quantity">
+                            <p>Quantity</p>
+                            <div class="pro-qty"><input for="qty" name="qty" id="qty" type="text" value="1"></div>
                         </div>
-                        <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="panel-body">
-                                @data.Description
+                        <button class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></button>
+                    </form>
+                    <div id="accordion" class="accordion-area">
+                        <div class="panel">
+                            <div class="panel-header" id="headingOne">
+                                <button class="panel-link active" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">information</button>
+                            </div>
+                            <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="panel-body">
+                                    @Model.Description
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                    
                 </div>
             </div>
+            <div class="row">
+                <div class="sharethis-inline-share-buttons"></div>
+            </div>
         </div>
-        <div class="row">
-            <div class="sharethis-inline-share-buttons"></div>
-        </div>
-    </div>
-</section>
-<!-- product section end -->
-<!-- RELATED PRODUCTS section -->
-@await Component.InvokeAsync("RelatedProduct", new { page = "Contact" })
-<!-- RELATED PRODUCTS section end -->
-<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5dd3ab6c15fa30001260b5d0&product=inline-share-buttons" async="async"></script>
+    </section>
+    <!-- product section end -->
+    <!-- RELATED PRODUCTS section -->
+    @await Component.InvokeAsync("RelatedProduct", new { page = "Contact" })
+    <!-- RELATED PRODUCTS section end -->
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5dd3ab6c15fa30001260b5d0&product=inline-share-buttons" async="async"></script>

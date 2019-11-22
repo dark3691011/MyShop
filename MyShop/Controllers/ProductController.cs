@@ -30,6 +30,8 @@ namespace MyShop.Controllers
                 List<Product> productsHasTypeId = _context.products.Include(p => p.Trademark).Include(p => p.Discount).Include(p => p.ProductType).Where(p => p.ProductType.TypeID == typeId || p.ProductType.FatherTypeID == typeId).ToList();
                 var productsHasTypeIdView = _mapper.Map<List<ProductViewModel>>(productsHasTypeId);
                 ViewBag.Data = productsHasTypeIdView;
+                ProductType type = _context.productTypes.SingleOrDefault(p => p.TypeID == typeId);
+                ViewBag.type = type;
                 return View();
             }
             if (trademarkId.HasValue)
@@ -54,26 +56,25 @@ namespace MyShop.Controllers
 
         // GET: Products/Details/5
 
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id.HasValue)
+            Product productDetail = _context.products.Include(p => p.Trademark).Include(p => p.Discount).SingleOrDefault(p => p.ProductID == id);
+            if (productDetail !=null)
             {
-                Product productHasId = _context.products.Include(p => p.Trademark).Include(p => p.Discount).SingleOrDefault(p => p.ProductID == id);
-                var productHasIdView = _mapper.Map<ProductDetailViewModel>(productHasId);
-                ViewBag.Data = productHasIdView;
-                return View();
+                ProductDetailViewModel productDetailView = _mapper.Map<ProductDetailViewModel>(productDetail);
+                return View(productDetailView);
             }
             return RedirectToAction("Category");
         }
 
-        public async Task<IActionResult> SeoDetails(int? id)
+        [Route("{type}/{url}")]
+        public IActionResult SeoDetails(string type, string url)
         {
-            if (id.HasValue)
+            Product product = _context.products.Include(p => p.Trademark).Include(p => p.Discount).SingleOrDefault(p => p.ProductNameSeoUrl == url);
+            if(product != null)
             {
-                Product productHasId = _context.products.Include(p => p.Trademark).Include(p => p.Discount).SingleOrDefault(p => p.ProductID == id);
-                var productHasIdView = _mapper.Map<ProductDetailViewModel>(productHasId);
-                ViewBag.Data = productHasIdView;
-                return View();
+                ProductDetailViewModel productDetailView = _mapper.Map<ProductDetailViewModel>(product);
+                return View("Details", productDetailView);
             }
             return RedirectToAction("Category");
         }
