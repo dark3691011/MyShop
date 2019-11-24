@@ -1,4 +1,7 @@
 ﻿@model MyShop.ViewModels.CheckOutViewModel
+@{ 
+    var data = ViewBag.data ?? new CheckOutViewModel();
+}
 
 <!-- checkout section  -->
 <section class="checkout-section spad">
@@ -13,11 +16,11 @@
                     <div class="row address-inputs">
                         <div class="col-md-12">
                             <p>Tên khách hàng:</p>
-                            <input type="text" asp-for="Name" placeholder="Name" value="@Model.Name">
+                            <input type="text" asp-for="Name" placeholder="Name" value="@data.Name">
                             <p>Địa chỉ:</p>
-                            <input type="text" asp-for="Addres" placeholder="Address" value="@Model.Addres">
+                            <input type="text" asp-for="Addres" placeholder="Address" value="@data.Addres">
                             <p>Số điệnt thoại:</p>
-                            <input type="text" asp-for="PhoneNumber" placeholder="Phone number" value="@Model.PhoneNumber">
+                            <input type="text" asp-for="PhoneNumber" placeholder="Phone number" value="@data.PhoneNumber">
                         </div>
                     </div>
                     <div class="cf-title">Delievery Info</div>
@@ -46,11 +49,8 @@
                         </div>
                     </div>
                     <div class="cf-title">Payment</div>
-                    <ul class="payment-list">
-                        <li>Paypal<a href="#"><img src="~/img/paypal.png" alt=""></a></li>
-                        <li>Credit / Debit card<a href="#"><img src="~/img/mastercart.png" alt=""></a></li>
-                        <li>Pay when you get the package</li>
-                    </ul>
+                    <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+                    <script>paypal.Buttons().render('body');</script>
                     <button class="site-btn submit-order-btn">Thanh toán</button>
                 </form>
             </div>

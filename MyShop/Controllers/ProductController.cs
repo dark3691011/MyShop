@@ -23,6 +23,8 @@ namespace MyShop.Controllers
             _mapper = mapper;
         }
 
+        [Route("hang-hoa")]
+        [Route("hang-hoa/{typeId?}/{trademarkId?}")]
         public IActionResult Category(int? typeId, int? trademarkId)
         {
             if (typeId.HasValue)

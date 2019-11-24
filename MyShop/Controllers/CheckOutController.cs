@@ -25,13 +25,10 @@ namespace MyShop.Controllers
         }
         public IActionResult Index(int? id)
         {
-            if (id.HasValue)
-            {
-                Customer customer = _context.customers.SingleOrDefault(p => p.CustomerID == id);
-                var customerView = _mapper.Map<CheckOutViewModel>(customer);
-                return View(customerView);
-            }
-            return RedirectToAction("Index","Home");
+            Customer customer = HttpContext.Session.Get<Customer>("Customer");
+            var data = _mapper.Map<CheckOutViewModel>(customer);
+            ViewBag.data = data;
+            return View();
         }
 
         [HttpPost]
