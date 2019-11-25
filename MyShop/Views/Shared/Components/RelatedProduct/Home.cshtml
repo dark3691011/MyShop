@@ -1,5 +1,6 @@
 ﻿@{
     var data = ViewBag.Data ?? new List<ProductViewModel>();
+    string type = "San pham moi nhat";
 }
 <!-- letest product section -->
 <section class="top-letest-product-section">
@@ -12,7 +13,9 @@
             {
                 <div class="product-item">
                     <div class="pi-pic">
-                        <img src="~/img/product/@data[i]?.ProductImage" alt="">
+                        <a title="@data[i].ProductName" href="/@type.ToUrlFriendly()/@data[i].ProductNameSeoUrl">
+                            <img src="~/img/product/@data[i]?.ProductImage" alt="">
+                        </a>
                         <div class="pi-links">
                             <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
                             <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>

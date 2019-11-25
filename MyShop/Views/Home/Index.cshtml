@@ -81,6 +81,9 @@
 <!-- Product filter section -->
 @await Component.InvokeAsync("RelatedProduct", new { page = "Home2" })
 <!-- Product filter section end -->
+<!--Rss-->
+@await Component.InvokeAsync("Rss", new { page = "https://vnexpress.net/rss/giai-tri.rss" })
+
 <!-- Banner section -->
 <section class="banner-section">
     <div class="container">

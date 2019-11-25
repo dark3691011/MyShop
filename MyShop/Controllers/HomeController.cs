@@ -12,22 +12,6 @@ namespace MyShop.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Session()
-        {
-            //set session
-            HttpContext.Session.SetString("Lop", "1911COMP1064");
-            HttpContext.Session.SetInt32("Nam", 3);
-
-            ProductType lo = new ProductType
-            {
-                TypeID = 1,
-                TypeName = "Laptop"
-            };
-
-            HttpContext.Session.Set<ProductType>("ProductType", lo);
-
-            return View();
-        }
         public IActionResult Index()
         {
             return View();
