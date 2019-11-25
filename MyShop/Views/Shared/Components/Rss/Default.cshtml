@@ -1,18 +1,19 @@
-﻿@model List<Chilkat.Rss>
+﻿@model Feed
 
+@using CodeHollow.FeedReader;
 <section class="top-letest-product-section">
     <div class="container">
         <div class="section-title">
             <h2>Tin tức</h2>
         </div>
         <div class="product-slider owl-carousel">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Items)
             {
                 <p>
-                    <a href="@item.GetString("link")">
-                        @item.GetString("title")
+                    <a href="@item.Link">
+                        @item.Title
                     </a>
-                    @Html.Raw(item.GetString("description"))
+                    @Html.Raw(item.Description)
                 </p>
             }
         </div>

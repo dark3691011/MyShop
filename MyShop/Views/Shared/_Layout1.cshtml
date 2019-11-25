@@ -2,10 +2,6 @@
 <html lang="zxx">
 zz<head>
     <title>My shop | Fashion</title>
-    <meta charset="UTF-8">
-    <meta name="description" content=" MyShop | eCommerce Template">
-    <meta name="keywords" content="divisima, eCommerce, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @RenderSection("metasocials", required: false)
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="shortcut icon" />
@@ -108,6 +104,12 @@ zz<head>
                     <li>
                         <a asp-controller="Contact">Contact</a>
                     </li>
+                    @if(kh?.Role == "Admin")
+                    {
+                    <li>
+                        <a asp-controller="Admin">Quản lý</a>
+                    </li>
+                    }
                 </ul>
             </div>
         </nav>
