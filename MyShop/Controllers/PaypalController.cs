@@ -23,7 +23,7 @@ namespace MyShopK6.Controllers
         {
             get
             {
-                var data = HttpContext.Session.Get<List<CartItem>>("GioHang");
+                var data = HttpContext.Session.Get<List<CartItem>>("Cart");
                 if (data == null)
                 {
                     data = new List<CartItem>();
@@ -35,8 +35,12 @@ namespace MyShopK6.Controllers
         public async Task<IActionResult> Checkout()
         {
             //SandboxEnvironment(clientId, clientSerect)
-            var environment = new SandboxEnvironment("AZ4ExMhO2SWYC78JIYuttkpWidwUBTuvvp8bRneUXBx9ZvDK1mcDNCyzt-hvt0ada_7Myq2ZI-x8ZiuQ", "EMm54L_aWkqodiZUmLPVV4mkKtruwJuK3qRPSHjXHLZU5_bCxxPczrbFaX7YSSRfE4N7Xf4Zw9lSMBg-");
+            string clientId = "AYOwjSPbuM8boAckmyHBzPF3fS5jkqsE6-i-fd_2Y66bMFW7t9miYPklGgcNAdXweQa4ijsjCRQnElL1";
+            string clientSecret = "EL485ImsKFuaWVHj8YqVRNwzc1-q8xsmFMaDnFyvBTwH5JT4zqyGe7dLT9F4-Q64-ebEaix79UYxnO4H";
+            var environment = new SandboxEnvironment(clientId,clientSecret);
             var client = new PayPalHttpClient(environment);
+
+            double UsdToVnd = 23211.67;
 
             //Đọc thông tin đơn hàng từ Session
             var itemList = new ItemList()
@@ -44,37 +48,20 @@ namespace MyShopK6.Controllers
                 Items = new List<Item>()
             };
 
-            var tongTien = Cart.Sum(p => p.TotalPrice);
+            double tongTien = Cart.Sum(p => p.TotalPrice)/UsdToVnd;
             foreach (var item in Cart)
             {
                 itemList.Items.Add(new Item()
                 {
                     Name = item.Product.ProductName,
                     Currency = "USD",
-                    Price = item.Product.UnitPrice.ToString(),
+                    Price = (item.Product.UnitPrice/UsdToVnd).ToString("0.00"),
                     Quantity = item.Amount.ToString(),
                     Sku = "sku",
                     Tax = "0"
                 });
             }
-            //itemList.Items.Add(new Item()
-            //{
-            //    Name = "Coca",
-            //    Currency = "USD",
-            //    Price = "5",
-            //    Quantity = "1",
-            //    Sku = "sku",
-            //    Tax = "0"
-            //});
-            //itemList.Items.Add(new Item()
-            //{
-            //    Name = "Pepsi",
-            //    Currency = "USD",
-            //    Price = "2",
-            //    Quantity = "3",
-            //    Sku = "sku",
-            //    Tax = "0"
-            //});
+            
 
             var payment = new Payment()
             {
@@ -85,24 +72,24 @@ namespace MyShopK6.Controllers
                     {
                         Amount = new Amount()
                         {
-                            Total = tongTien.ToString(),
+                            Total = tongTien.ToString("0.00"),
                             Currency = "USD",
                             Details = new AmountDetails
                             {
                                 Tax = "0",
                                 Shipping = "0",
-                                Subtotal = tongTien.ToString()
+                                Subtotal = tongTien.ToString("0.00")
                             }
                         },
                         ItemList = itemList,
-                        Description = "Don hang 001",
+                        Description = "Don hang A" ,
                         InvoiceNumber = DateTime.Now.Ticks.ToString()
                     }
                 },
                 RedirectUrls = new RedirectUrls()
                 {
-                    CancelUrl = "http://localhost:44370/Paypal/Fail",
-                    ReturnUrl = "http://localhost:44370/Paypal/Success"
+                    CancelUrl = "http://localhost:44370/paypal/fail",
+                    ReturnUrl = "https://localhost:44370/paypal/Execute"
                 },
                 Payer = new Payer()
                 {
@@ -139,10 +126,42 @@ namespace MyShopK6.Controllers
                 var statusCode = httpException.StatusCode;
                 var debugId = httpException.Headers.GetValues("PayPal-Debug-Id").FirstOrDefault();
 
-                return RedirectToAction("Fail");
+                string a = tongTien.ToString();
+
+                return Content(a);
             }
         }
+        public async Task<IActionResult> Execute(string paymentId, string PayerId)
+        {
+            //SandboxEnvironment(clientId, clientSerect)
+            string clientId = "AYOwjSPbuM8boAckmyHBzPF3fS5jkqsE6-i-fd_2Y66bMFW7t9miYPklGgcNAdXweQa4ijsjCRQnElL1";
+            string clientSecret = "EL485ImsKFuaWVHj8YqVRNwzc1-q8xsmFMaDnFyvBTwH5JT4zqyGe7dLT9F4-Q64-ebEaix79UYxnO4H";
+            var environment = new SandboxEnvironment(clientId, clientSecret);
+            var client = new PayPalHttpClient(environment);
 
+
+            PaymentExecuteRequest request = new PaymentExecuteRequest(paymentId);
+
+            request.RequestBody(new PaymentExecution()
+            {
+                PayerId = PayerId
+            });
+
+            try
+            {
+                HttpResponse response = await client.Execute(request);
+                var statusCode = response.StatusCode;
+                Payment result = response.Result<Payment>();
+                return RedirectToAction("Success");
+            }
+            catch (HttpException httpException)
+            {
+                var statusCode = httpException.StatusCode;
+                var debugId = httpException.Headers.GetValues("PayPal-Debug-Id").FirstOrDefault();
+                return RedirectToAction("Fail");
+            }
+
+        }
         public IActionResult Success()
         {
             //Tạo đơn hàng trong CSDL với trạng thái : Đã thanh toán, phương thức: Paypal

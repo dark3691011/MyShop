@@ -17,7 +17,10 @@
                             <img src="~/img/product/@data[i]?.ProductImage" alt="">
                         </a>
                         <div class="pi-links">
-                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                            <form asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@data[i].ProductID" asp-route-qty=1 method="post">
+                                <button class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></button>
+                            </form>
+
                             <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
                         </div>
                     </div>

@@ -18,7 +18,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Views\Paypal\" />
     <Folder Include="wwwroot\Img\logo\" />
   </ItemGroup>
 

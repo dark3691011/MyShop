@@ -19,6 +19,7 @@
                                     <th class="quy-th">Quantity</th>
                                     <th class="size-th">SizeSize</th>
                                     <th class="total-th">Price</th>
+                                    <th>Button</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,94 +42,32 @@
                                         </td>
                                         <td class="size-col"><h4>Size M</h4></td>
                                         <td class="total-col"><h4>@item.TotalPrice</h4></td>
+                                        <td>
+                                            <form asp-controller="Cart" asp-action="RemoveCart" asp-route-id="@item.Product.ProductID" method="post">
+                                                <button>X</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 }
-                                
+
                             </tbody>
                         </table>
                     </div>
                     <div class="total-cost">
-                        <h6>Total <span>@Model.Sum(p =>p.TotalPrice) VND</span></h6>
+                        <h6>Total <span>@Model.Sum(p => p.TotalPrice) VND</span></h6>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 card-right">                
-                <a asp-controller="CheckOut" class="site-btn">Proceed to checkout</a>
-                <a asp-controller="Product" asp-action="Category" class="site-btn sb-dark">Continue shopping</a>
+            <div class="col-lg-4 card-right">
+                <a asp-controller="CheckOut" class="site-btn">Đến trang thanh toán</a>
+                <a asp-controller="Product" asp-action="Category" class="site-btn sb-dark">Tiếp tục mua hàng</a>
+                <p>Thanh toán ngay với paypal:</p>
+                <a asp-controller="Paypal" asp-action="CheckOut"><img src="~/Img/Paypal.png" /></a>
             </div>
         </div>
     </div>
 </section>
 <!-- cart section end -->
 <!-- Related product section -->
-<section class="related-product-section">
-    <div class="container">
-        <div class="section-title text-uppercase">
-            <h2>Continue Shopping</h2>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <div class="tag-new">New</div>
-                        <img src="./img/product/2.jpg" alt="">
-                        <div class="pi-links">
-                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                        </div>
-                    </div>
-                    <div class="pi-text">
-                        <h6>$35,00</h6>
-                        <p>Black and White Stripes Dress</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <img src="./img/product/5.jpg" alt="">
-                        <div class="pi-links">
-                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                        </div>
-                    </div>
-                    <div class="pi-text">
-                        <h6>$35,00</h6>
-                        <p>Flamboyant Pink Top </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <img src="./img/product/9.jpg" alt="">
-                        <div class="pi-links">
-                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                        </div>
-                    </div>
-                    <div class="pi-text">
-                        <h6>$35,00</h6>
-                        <p>Flamboyant Pink Top </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <img src="./img/product/1.jpg" alt="">
-                        <div class="pi-links">
-                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                        </div>
-                    </div>
-                    <div class="pi-text">
-                        <h6>$35,00</h6>
-                        <p>Flamboyant Pink Top </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@await Component.InvokeAsync("RelatedProduct", new { page = "Contact" })
 <!-- Related product section end -->

@@ -49,8 +49,7 @@
                         </div>
                     </div>
                     <div class="cf-title">Payment</div>
-                    <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
-                    <script>paypal.Buttons().render('body');</script>
+                    <p>Paypal :</p><a asp-action="CheckOut" asp-controller="Paypal"><img src="~/Img/Paypal.png" style="width:160px;height:80px;"/></a>
                     <button class="site-btn submit-order-btn">Thanh toán</button>
                 </form>
             </div>

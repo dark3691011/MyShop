@@ -80,7 +80,7 @@ namespace MyShop.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult RemoveCart(int id, string loai)
+        public IActionResult RemoveCart(int id)
         {
             List<CartItem> carts = Cart;
 
@@ -92,14 +92,7 @@ namespace MyShop.Controllers
                 HttpContext.Session.Set("Cart", carts);
             }
 
-            if (loai == "AJAX")
-            {
-                return Json(new
-                {
-                    Amount = Cart.Sum(p => p.Amount),
-                    TotalPrice = Cart.Sum(p => p.TotalPrice)
-                });
-            }
+            
 
             return RedirectToAction("Index");
         }
