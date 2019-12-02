@@ -9,11 +9,11 @@
     var sonProductTypes = Model.Where(p => p.FatherTypeID == fatherProductType.TypeID);
 
     <li>
-        <a asp-controller="Product" asp-action="Category" asp-route-typeId="@fatherProductType.TypeID">@fatherProductType.TypeName</a>
+        <a asp-controller="Product" asp-action="Category" asp-route-loai="@fatherProductType.TypeNameSeoUrl">@fatherProductType.TypeName</a>
         <ul class="sub-menu">
             @foreach (var productType in sonProductTypes)
             {
-                <li><a asp-controller="Product" asp-action="Category" asp-route-typeId="@productType.TypeID">@productType.TypeName</a></li>
+                <li><a asp-controller="Product" asp-action="Category" asp-route-loai="@productType.TypeNameSeoUrl">@productType.TypeName</a></li>
             }
         </ul>
     </li>
