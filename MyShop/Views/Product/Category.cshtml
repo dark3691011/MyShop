@@ -9,6 +9,7 @@
 
 
 <!-- Category section -->
+@ViewBag.type?.TypeID
 <section class="category-section spad">
     <div class="container">
         <div class="row">
@@ -28,7 +29,7 @@
                         <div class="product-item">
                             <div class="pi-pic">
                                 <div class="tag-sale">@product.Discount %</div>
-                                <a title="@product.ProductName" href="/@type.ToUrlFriendly()/@product.ProductNameSeoUrl">
+                                <a asp-action="Details" asp-route-url="@product.ProductNameSeoUrl" asp-route-type="@type.ToUrlFriendly()">
                                     <img src="~/Img/product/@product.ProductImage" alt="">
                                 </a>
                                 <div class="pi-links">

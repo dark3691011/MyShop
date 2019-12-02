@@ -12,6 +12,7 @@ using MyShop.ViewModels;
 
 namespace MyShop.Controllers
 {
+    [Route("hang-hoa")]
     public class ProductController : Controller
     {
         private readonly MyDbContext _context;
@@ -23,24 +24,18 @@ namespace MyShop.Controllers
             _mapper = mapper;
         }
 
-        [Route("hang-hoa")]
-        [Route("hang-hoa/{typeId?}/{trademarkId?}")]
-        public IActionResult Category(int? typeId, int? trademarkId)
+        [Route("/hang-hoa")]
+        [Route("/hang-hoa/{loai}")]
+        public IActionResult Category(string loai)
         {
-            if (typeId.HasValue)
+            if (!string.IsNullOrEmpty(loai))
             {
-                List<Product> productsHasTypeId = _context.products.Include(p => p.Trademark).Include(p => p.Discount).Include(p => p.ProductType).Where(p => p.ProductType.TypeID == typeId || p.ProductType.FatherTypeID == typeId).ToList();
+
+                ProductType type = _context.productTypes.SingleOrDefault(p => p.TypeNameSeoUrl == loai);
+                List<Product> productsHasTypeId = _context.products.Include(p => p.Trademark).Include(p => p.Discount).Include(p => p.ProductType).Where(p => p.ProductType.TypeID == type.TypeID || p.ProductType.FatherProductType.TypeID == type.TypeID).ToList();
                 var productsHasTypeIdView = _mapper.Map<List<ProductViewModel>>(productsHasTypeId);
                 ViewBag.Data = productsHasTypeIdView;
-                ProductType type = _context.productTypes.SingleOrDefault(p => p.TypeID == typeId);
                 ViewBag.type = type;
-                return View();
-            }
-            if (trademarkId.HasValue)
-            {
-                List<Product> productsHasTrademarkId = _context.products.Include(p =>p.Discount).Include(p => p.Trademark).Include(p => p.Discount).Include(p => p.ProductType).Where(p => p.Trademark.TrademarkID == trademarkId).ToList();
-                var productsHasTrademarkIdView = _mapper.Map<List<ProductViewModel>>(productsHasTrademarkId);
-                ViewBag.Data = productsHasTrademarkIdView;
                 return View();
             }
             List<Product> products = _context.products.Include(p => p.Trademark).Include(p => p.Discount).Include(p => p.ProductType).ToList();
@@ -50,6 +45,7 @@ namespace MyShop.Controllers
         }
 
         // GET: Products
+        [Route("quan-ly-san-pham")]
         public async Task<IActionResult> Index()
         {
             var myDbContext = _context.products.Include(p => p.Discount).Include(p => p.ProductType).Include(p => p.Trademark);
@@ -58,7 +54,7 @@ namespace MyShop.Controllers
 
         // GET: Products/Details/5
 
-        public IActionResult Details(int id)
+        /*public IActionResult Details(int id)
         {
             Product productDetail = _context.products.Include(p => p.Trademark).Include(p => p.Discount).SingleOrDefault(p => p.ProductID == id);
             if (productDetail !=null)
@@ -67,21 +63,22 @@ namespace MyShop.Controllers
                 return View(productDetailView);
             }
             return RedirectToAction("Category");
-        }
+        }*/
 
         [Route("{type}/{url}")]
-        public IActionResult SeoDetails(string type, string url)
+        public IActionResult Details(string type, string url)
         {
             Product product = _context.products.Include(p => p.Trademark).Include(p => p.Discount).SingleOrDefault(p => p.ProductNameSeoUrl == url);
             if(product != null)
             {
                 ProductDetailViewModel productDetailView = _mapper.Map<ProductDetailViewModel>(product);
-                return View("Details", productDetailView);
+                return View(productDetailView);
             }
             return RedirectToAction("Category");
         }
 
         // GET: Products/Create
+        [Route("them-moi")]
         public IActionResult Create()
         {
             ViewData["DiscountID"] = new SelectList(_context.discounts, "DiscountID", "DiscountID");
@@ -111,6 +108,7 @@ namespace MyShop.Controllers
         }
 
         // GET: Products/Edit/5
+        [Route("sua-chi-tiet/{id?}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -168,6 +166,7 @@ namespace MyShop.Controllers
         }
 
         // GET: Products/Delete/5
+        [Route("xoa/{id?}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

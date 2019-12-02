@@ -20,6 +20,8 @@ namespace MyShop.Controllers
             _context = context;
             _mapper = mapper;
         }
+
+
         public IActionResult Index()
         {
             return View(Cart);

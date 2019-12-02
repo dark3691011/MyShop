@@ -23,5 +23,8 @@ namespace MyShop.Models
         public int? FatherTypeID { get; set; }
         [ForeignKey("FatherTypeID")]
         public ProductType FatherProductType { get; set; }
+
+
+        public string TypeNameSeoUrl => TypeName.ToUrlFriendly();
     }
 }

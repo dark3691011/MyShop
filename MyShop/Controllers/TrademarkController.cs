@@ -20,12 +20,14 @@ namespace MyShop.Controllers
         }
 
         // GET: Trademarks
+        [Route("nhan-hieu")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.trademarks.ToListAsync());
         }
 
         // GET: Trademarks/Details/5
+        [Route("nhan-hieu/{id?}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

@@ -164,14 +164,12 @@ namespace MyShopK6.Controllers
         }
         public IActionResult Success()
         {
-            //Tạo đơn hàng trong CSDL với trạng thái : Đã thanh toán, phương thức: Paypal
-            return Content("Thanh toán thành công");
+            return View();
         }
 
         public IActionResult Fail()
         {
-            //Tạo đơn hàng trong CSDL với trạng thái : Chưa thanh toán, phương thức: 
-            return Content("Thanh toán thất bại");
+            return View();
         }
     }
 }
