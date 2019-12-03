@@ -9,11 +9,18 @@ using PayPal.Core;
 using PayPal.v1.Payments;
 using MyShop.Helpers;
 using MyShop.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyShopK6.Controllers
 {
     public class PaypalController : Controller
     {
+        private readonly MyDbContext _context;
+
+        public PaypalController(MyDbContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
             return View();
@@ -32,6 +39,7 @@ namespace MyShopK6.Controllers
                 return data;
             }
         }
+        [Authorize]
         public async Task<IActionResult> Checkout()
         {
             //SandboxEnvironment(clientId, clientSerect)
@@ -162,13 +170,31 @@ namespace MyShopK6.Controllers
             }
 
         }
-        public IActionResult Success()
+        public async Task<IActionResult> Success()
         {
+            Bill bill = new Bill();
+            var kh = HttpContext.Session.Get<Customer>("Customer");
+            bill.BillTime = DateTime.Now;
+            bill.CustomerID = kh.CustomerID;
+            bill.PaymentMethod = "Paypal";
+            bill.Status = "Đã thanh toán";
+            bill.TotalAmount = Cart.Sum(p => p.TotalPrice);
+            _context.Add(bill);
+            await _context.SaveChangesAsync();
             return View();
         }
 
-        public IActionResult Fail()
+        public async Task<IActionResult> Fail()
         {
+            Bill bill = new Bill();
+            var kh = HttpContext.Session.Get<Customer>("Customer");
+            bill.BillTime = DateTime.Now;
+            bill.CustomerID = kh.CustomerID;
+            bill.PaymentMethod = "Paypal";
+            bill.Status = "Thanh toán thất bại";
+            bill.TotalAmount = Cart.Sum(p => p.TotalPrice);
+            _context.Add(bill);
+            await _context.SaveChangesAsync();
             return View();
         }
     }
