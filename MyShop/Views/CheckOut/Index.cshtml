@@ -10,7 +10,7 @@
             <div class="col-lg-8 order-2 order-lg-1">
                 <form class="checkout-form" asp-action="Index">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="CustomerID" />
+                    <input type="hidden" asp-for="CustomerID" value="@data.CustomerID"/>
                     <div class="cf-title">Billing Address</div>
 
                     <div class="row address-inputs">

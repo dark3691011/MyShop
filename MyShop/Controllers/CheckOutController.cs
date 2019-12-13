@@ -23,7 +23,7 @@ namespace MyShop.Controllers
             _context = context;
             _mapper = mapper;
         }
-        public IActionResult Index(int? id)
+        public IActionResult Index()
         {
             Customer customer = HttpContext.Session.Get<Customer>("Customer");
             var data = _mapper.Map<CheckOutViewModel>(customer);
@@ -32,12 +32,12 @@ namespace MyShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(int id,CheckOutViewModel customerView)
+        public IActionResult Index(CheckOutViewModel customerView)
         {
             if (ModelState.IsValid)
             {
                 //Update customer
-                Customer customer = _context.customers.SingleOrDefault(p => p.CustomerID == id);
+                Customer customer = _context.customers.SingleOrDefault(p => p.CustomerID == customerView.CustomerID);
                 customer.Name = customerView.Name;
                 customer.Addres = customerView.Addres;
                 customer.PhoneNumber = customerView.PhoneNumber;
@@ -62,10 +62,19 @@ namespace MyShop.Controllers
                 _context.SaveChanges();
                 var data = new List<CartItem>();
                 HttpContext.Session.Set("Cart", data);
+                return RedirectToAction("Success");
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Fail");
+        }
+        public IActionResult Success()
+        {
+            return View();
         }
 
+        public IActionResult Fail()
+        {
+            return View();
+        }
         public List<CartItem> Cart
         {
             get

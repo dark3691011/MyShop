@@ -136,9 +136,10 @@ namespace MyShopK6.Controllers
 
                 string a = tongTien.ToString();
 
-                return Content(a);
+                return RedirectToAction("Fail");
             }
         }
+
         public async Task<IActionResult> Execute(string paymentId, string PayerId)
         {
             //SandboxEnvironment(clientId, clientSerect)

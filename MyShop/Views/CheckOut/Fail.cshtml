@@ -1,0 +1,14 @@
+﻿<!-- Page info -->
+<div class="page-top-info">
+    <div class="container">
+        <h4>Thanh toán thất bại</h4>
+        <div class="site-pagination">
+            <a asp-controller="Home" asp-action="Index">Trở về trang chủ</a>
+        </div>
+        <div class="site-pagination">
+            <a asp-controller="Product" asp-action="category">Tiếp tục mua hàng</a>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+@await Component.InvokeAsync("RelatedProduct", new { page = "Contact" })

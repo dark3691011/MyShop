@@ -3,6 +3,8 @@
 <head>
     <title>My shop | Fashion</title>
     @RenderSection("metasocials", required: false)
+    <meta name="description" content="Test your website with the free SEO check from Seobility and get tips for a better search engine optimization.">
+    <link rel="icon" type="image/x-icon" href="/path/to/favicon.ico">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="shortcut icon" />
 
@@ -35,7 +37,7 @@
                       <div class="col-lg-2 text-center text-lg-left">
                           <!-- logo -->
                           <a asp-controller="home" class="site-logo">
-                              <img src="~/Img/logo.png" alt="">
+                              <img src="~/Img/logo.png" alt="Logo">
                           </a>
                       </div>
                       <div class="col-xl-6 col-lg-5">
@@ -58,8 +60,7 @@
                                   }
                                   else
                                   {
-                                      <p>@kh?.Name </p>
-
+                                      <a asp-controller="Customer" asp-action="Details" asp-route-id="@kh?.CustomerID">@kh?.Name </a>
                                       <a asp-controller="Customer" asp-action="Logout">Đăng xuất</a>
                                   }
                               </div>
@@ -117,14 +118,14 @@
       <section class="footer-section">
           <div class="container">
               <div class="footer-logo text-center">
-                  <a asp-controller="home"><img src="~/img/logo-light.png" alt=""></a>
+                  <a asp-controller="home"><img src="~/img/logo-light.png" alt="LightLogo"></a>
               </div>
               <div class="row">
                   <div class="col-lg-3 col-sm-6">
                       <div class="footer-widget about-widget">
                           <h2>About</h2>
                           <p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam frin-gilla faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>
-                          <img src="~/img/cards.png" alt="">
+                          <img src="~/img/cards.png" alt="Card">
                       </div>
                   </div>
                   <div class="col-lg-3 col-sm-6">
